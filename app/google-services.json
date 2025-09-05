@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "800252508965",
+    "project_id": "agrohack-b7d6a",
+    "storage_bucket": "agrohack-b7d6a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800252508965:android:fee253d51e8219d7b6b8cc",
+        "android_client_info": {
+          "package_name": "com.unitec.agrohack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAIdDbYwTGWmbHTC9nHhJccmqA8Sv6apY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
