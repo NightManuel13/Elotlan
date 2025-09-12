@@ -3,6 +3,8 @@ package com.unitec.agrohack.ui.presentation.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -12,9 +14,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(onLogout: () -> Unit) {
     var notificationsEnabled by remember { mutableStateOf(true) }
     var darkModeEnabled by remember { mutableStateOf(false) }
     
@@ -161,7 +164,7 @@ fun ProfileScreen() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Help,
+                        imageVector = Icons.AutoMirrored.Filled.Help,
                         contentDescription = null,
                         modifier = Modifier.padding(end = 8.dp)
                     )
@@ -176,7 +179,7 @@ fun ProfileScreen() {
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             TextButton(
-                onClick = { /* Handle logout */ },
+                onClick = { onLogout() },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
@@ -190,7 +193,7 @@ fun ProfileScreen() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        imageVector = Icons.Default.ExitToApp,
+                        imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                         contentDescription = null,
                         modifier = Modifier.padding(end = 8.dp)
                     )
@@ -205,6 +208,6 @@ fun ProfileScreen() {
 @Composable
 fun ProfileScreenPreview() {
     MaterialTheme {
-        ProfileScreen()
+        ProfileScreen(onLogout = {})
     }
 }

@@ -110,7 +110,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HomeScreen(onLogout: () -> Unit) {
-    AgroManagerApp()
+    AgroManagerApp(onLogout = onLogout)
 }
 
 @Preview(showBackground = true)
