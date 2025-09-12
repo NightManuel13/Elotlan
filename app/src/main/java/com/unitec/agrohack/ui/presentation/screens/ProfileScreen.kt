@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.google.firebase.auth.FirebaseAuth
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 fun ProfileScreen(onLogout: () -> Unit) {
     var notificationsEnabled by remember { mutableStateOf(true) }
     var darkModeEnabled by remember { mutableStateOf(false) }
+    var userEmail by remember { mutableStateOf("Cargando correo...") }
     
     Column(
         modifier = Modifier
@@ -54,7 +56,22 @@ fun ProfileScreen(onLogout: () -> Unit) {
                         tint = MaterialTheme.colorScheme.onPrimary
                     )
                 }
-                
+
+                LaunchedEffect(Unit) {
+                    val user = FirebaseAuth.getInstance().currentUser
+                    user?.let {
+                        // El usuario está logueado, intentamos obtener su correo.
+                        val email = it.email
+                        if (email != null) {
+                            userEmail = email // Actualizamos el estado, lo que dispara una recomposición.
+                        } else {
+                            userEmail = "Correo no disponible" // Para casos donde no hay correo (ej. autenticación anónima)
+                        }
+                    } ?: run {
+                        userEmail = "Ningún usuario ha iniciado sesión"
+                    }
+                }
+
                 Column {
                     Text(
                         text = "Juan Pérez",
@@ -62,7 +79,7 @@ fun ProfileScreen(onLogout: () -> Unit) {
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        text = "juan.perez@email.com",
+                        text = userEmail,
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -116,6 +133,7 @@ fun ProfileScreen(onLogout: () -> Unit) {
                 }
                 
                 // Dark Mode Setting
+                /*
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -143,7 +161,7 @@ fun ProfileScreen(onLogout: () -> Unit) {
                         checked = darkModeEnabled,
                         onCheckedChange = { darkModeEnabled = it }
                     )
-                }
+                }*/
             }
         }
         
