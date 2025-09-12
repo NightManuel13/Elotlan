@@ -13,7 +13,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.unitec.agrohack.HomeScreen
 import com.unitec.agrohack.ui.presentation.components.AgroBottomAppBar
 import com.unitec.agrohack.ui.presentation.components.AgroTopAppBar
 import com.unitec.agrohack.ui.presentation.screens.AIGenerationScreen
