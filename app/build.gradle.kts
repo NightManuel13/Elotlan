@@ -45,6 +45,7 @@ dependencies {
     // Firebase Auth
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
+    implementation("com.google.firebase:firebase-appcheck-playintegrity")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
