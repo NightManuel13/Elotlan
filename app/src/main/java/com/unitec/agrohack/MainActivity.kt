@@ -29,10 +29,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.firebase.FirebaseApp
-import com.google.firebase.appcheck.ktx.appCheck
-import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import com.unitec.agrohack.ui.LoginScreen
 import com.unitec.agrohack.ui.RegisterScreen
 import com.unitec.agrohack.ui.menus.AgroManagerApp
@@ -53,9 +50,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         // Firebase comunication initialization
         FirebaseApp.initializeApp(this)
-        Firebase.appCheck.installAppCheckProviderFactory(
-            PlayIntegrityAppCheckProviderFactory.getInstance(),
-        )
 
         setContent {
             AgroHackTheme {
