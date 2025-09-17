@@ -20,9 +20,8 @@ import com.google.firebase.auth.FirebaseAuth
 @Composable
 fun ProfileScreen(onLogout: () -> Unit) {
     var notificationsEnabled by remember { mutableStateOf(true) }
-    var darkModeEnabled by remember { mutableStateOf(false) }
     var userEmail by remember { mutableStateOf("Cargando correo...") }
-    
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -62,11 +61,8 @@ fun ProfileScreen(onLogout: () -> Unit) {
                     user?.let {
                         // El usuario está logueado, intentamos obtener su correo.
                         val email = it.email
-                        if (email != null) {
-                            userEmail = email // Actualizamos el estado, lo que dispara una recomposición.
-                        } else {
-                            userEmail = "Correo no disponible" // Para casos donde no hay correo (ej. autenticación anónima)
-                        }
+                        userEmail = // Actualizamos el estado, lo que dispara una recomposición.
+                            email ?: "Correo no disponible" // Para casos donde no hay correo (ej. autenticación anónima)
                     } ?: run {
                         userEmail = "Ningún usuario ha iniciado sesión"
                     }
@@ -74,7 +70,7 @@ fun ProfileScreen(onLogout: () -> Unit) {
 
                 Column {
                     Text(
-                        text = "Juan Pérez",
+                        text = "Usuario",
                         style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -84,9 +80,21 @@ fun ProfileScreen(onLogout: () -> Unit) {
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
+
+
+                TextButton(
+                    onClick = { /* Handle edit profile */ }
+                ){ Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Editar Perfil",
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .size(20.dp)
+                        .padding(top = 4.dp)
+                )}
             }
         }
-        
+
         // Settings Card
         Card(
             modifier = Modifier.fillMaxWidth(),
@@ -101,7 +109,7 @@ fun ProfileScreen(onLogout: () -> Unit) {
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.padding(bottom = 12.dp)
                 )
-                
+
                 // Notifications Setting
                 Row(
                     modifier = Modifier
@@ -125,13 +133,13 @@ fun ProfileScreen(onLogout: () -> Unit) {
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     }
-                    
+
                     Switch(
                         checked = notificationsEnabled,
                         onCheckedChange = { notificationsEnabled = it }
                     )
                 }
-                
+
                 // Dark Mode Setting
                 /*
                 Row(
@@ -156,7 +164,7 @@ fun ProfileScreen(onLogout: () -> Unit) {
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     }
-                    
+
                     Switch(
                         checked = darkModeEnabled,
                         onCheckedChange = { darkModeEnabled = it }
@@ -164,14 +172,14 @@ fun ProfileScreen(onLogout: () -> Unit) {
                 }*/
             }
         }
-        
+
         // Help & Support
         Card(
             modifier = Modifier.fillMaxWidth(),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             TextButton(
-                onClick = { /* Handle help */ },
+                onClick = { /* pantalla de soporte tecnico */ },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
@@ -190,7 +198,7 @@ fun ProfileScreen(onLogout: () -> Unit) {
                 }
             }
         }
-        
+
         // Logout
         Card(
             modifier = Modifier.fillMaxWidth(),

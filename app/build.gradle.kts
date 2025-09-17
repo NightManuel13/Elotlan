@@ -46,6 +46,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     implementation("com.google.firebase:firebase-appcheck-playintegrity")
+    implementation("com.google.firebase:firebase-firestore:26.0.0")
     implementation(libs.firebase.database)
 
     testImplementation(libs.junit)
