@@ -105,7 +105,7 @@ com.unitec.agrohack/
 1. Clona el repositorio, puedes usar la terminal o descargar el proyecto
 
   - Windows y Mac
-    - git: `git clone` [url](https://github.com/NightManuel13/Elotlan.git) , para branch `git checkout <rama>`
+    - git: `git clone https://github.com/NightManuel13/Elotlan.git` , para branch `git checkout <rama>`
     - github cli: `gh repo clone NightManuel13/Elotlan`
   
 2. Abre el proyecto en Android Studio
