@@ -105,14 +105,14 @@ com.unitec.agrohack/
 1. Clona el repositorio, puedes usar la terminal o descargar el proyecto
 
   - Windows y Mac
-    - git: `git clone `[<url>](https://github.com/NightManuel13/Elotlan.git), para branch `git checkout <rama>`
+    - git: `git clone` [url](https://github.com/NightManuel13/Elotlan.git) , para branch `git checkout <rama>`
     - github cli: `gh repo clone NightManuel13/Elotlan`
   
 2. Abre el proyecto en Android Studio
 3. Sincroniza las dependencias de Gradle
 4. Ejecuta la aplicación en un dispositivo o emulador
 
-   Comandos Gradle (alternativa desde terminal):
+Comandos Gradle (alternativa desde terminal):
 - Windows
   - `gradlew.bat assembleDebug`
   - `gradlew.bat installDebug`
@@ -123,6 +123,8 @@ com.unitec.agrohack/
 Limpiar el proyecto:
 - Windows: `gradlew.bat clean`
 - macOS/Linux: `./gradlew clean`
+
+---
 
 ## Dependencias Principales
 
@@ -160,6 +162,8 @@ La aplicación incluye 5 fincas de ejemplo:
 - [ ] Notificaciones de cosecha y mantenimiento
 - [ ] Modo offline
 - [ ] Sincronización con Firebase
+
+---
 
 ## Contribuir
 
