@@ -67,6 +67,7 @@ fun LoginScreen(
     ) { padding ->
         val isDark = isSystemInDarkTheme()
         val backgroundColor = if (isDark) Color(0xFF305DA7) else Color(0xFF27B3FF)
+
         Box(
             modifier = Modifier
                 .fillMaxSize()

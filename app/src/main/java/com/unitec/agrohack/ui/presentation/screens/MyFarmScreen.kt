@@ -43,6 +43,14 @@ fun MyFarmScreen() {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
+
+        TextButton(
+            onClick = { /* Acción al hacer clic en el botón */ },
+        ) {
+            Text(
+                text = "Acceder a mi finca"
+            )
+        }
     }
 }
 

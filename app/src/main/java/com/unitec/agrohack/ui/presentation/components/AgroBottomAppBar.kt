@@ -15,7 +15,7 @@ fun AgroBottomAppBar(
 ) {
     NavigationBar {
         val items = listOf(
-            BottomNavItem(Screen.Farms, Icons.Default.Home, "Fincas"),
+            BottomNavItem(Screen.Tools, Icons.Default.AddBusiness, "Comprar"),
             BottomNavItem(Screen.Products, Icons.Default.ShoppingCart, "Productos"),
             BottomNavItem(Screen.MyFarm, Icons.Default.Eco, "Tu Finca"),
             BottomNavItem(Screen.Statistics, Icons.Default.BarChart, "Estadísticas"),
@@ -61,7 +61,7 @@ data class BottomNavItem(
 fun AgroBottomAppBarPreview() {
     MaterialTheme {
         AgroBottomAppBar(
-            currentScreen = Screen.Farms,
+            currentScreen = Screen.Tools,
             onScreenSelected = {}
         )
     }

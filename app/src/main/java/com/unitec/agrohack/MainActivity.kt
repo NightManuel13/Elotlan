@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -16,9 +17,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -42,7 +44,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun MyLottie() {
-    val url = "https://cdn.lottielab.com/l/F1CXX2BhD9oeYK.json?v=117d071e5531e18f1b3ba3b2&w=1"
+    val url = "https://cdn.lottielab.com/l/F1CXX2BhD9oeYK.json?v=117d0810684176c0badf5287&w=1"
     val composition by rememberLottieComposition(LottieCompositionSpec.Url(url))
     val progress by animateLottieCompositionAsState(composition, iterations = LottieConstants.IterateForever)
     LottieAnimation(composition = composition, progress = { progress })
@@ -75,9 +77,8 @@ class MainActivity : ComponentActivity() {
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .background(Color( 0xFF91E17B))
-                                .padding(innerPadding),
-                            horizontalAlignment = Alignment.CenterHorizontally,
+                                .background(Color.White),
+                            horizontalAlignment = Alignment.Start,
                             verticalArrangement = Arrangement.Center
                         ) {
                             MyLottie()

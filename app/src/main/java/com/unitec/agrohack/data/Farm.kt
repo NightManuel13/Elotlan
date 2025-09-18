@@ -3,13 +3,14 @@ package com.unitec.agrohack.data
 import androidx.compose.ui.graphics.Color
 
 data class Farm(
-    val id: Int,
+    val id: String,
     val name: String,
     val description: String,
     val location: String,
     val imageUrl: String,
     val certificate: String,
-    val production: List<ProductionItem>
+    val production: List<ProductionItem>,
+    val plots: List<Plot>
 )
 
 data class ProductionItem(
@@ -32,7 +33,7 @@ object FarmRepository {
                     ProductionItem("Café", 60, Color(0xFF2D5F3F)),
                     ProductionItem("Aguacate", 30, Color(0xFF52B788)),
                     ProductionItem("Otros", 10, Color(0xFF81C784))
-                )
+                ),
             ),
             Farm(
                 id = 2,
@@ -45,7 +46,7 @@ object FarmRepository {
                     ProductionItem("Aguacate", 85, Color(0xFF2D5F3F)),
                     ProductionItem("Limón", 10, Color(0xFF52B788)),
                     ProductionItem("Otros", 5, Color(0xFF81C784))
-                )
+                ),
             ),
             Farm(
                 id = 3,
@@ -58,7 +59,7 @@ object FarmRepository {
                     ProductionItem("Maíz", 70, Color(0xFF2D5F3F)),
                     ProductionItem("Sorgo", 20, Color(0xFF52B788)),
                     ProductionItem("Soja", 10, Color(0xFF81C784))
-                )
+                ),
             ),
             Farm(
                 id = 4,
@@ -72,7 +73,7 @@ object FarmRepository {
                     ProductionItem("Pepino", 25, Color(0xFF52B788)),
                     ProductionItem("Pimiento", 20, Color(0xFF81C784)),
                     ProductionItem("Otros", 15, Color(0xFFA5D6A7))
-                )
+                ),
             ),
             Farm(
                 id = 5,
@@ -86,7 +87,7 @@ object FarmRepository {
                     ProductionItem("Caña", 30, Color(0xFF52B788)),
                     ProductionItem("Plátano", 15, Color(0xFF81C784)),
                     ProductionItem("Otros", 10, Color(0xFFA5D6A7))
-                )
+                ),
             )
         )
     }

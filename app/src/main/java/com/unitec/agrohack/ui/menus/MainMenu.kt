@@ -21,9 +21,10 @@ import com.unitec.agrohack.ui.presentation.screens.MyFarmScreen
 import com.unitec.agrohack.ui.presentation.screens.ProductsScreen
 import com.unitec.agrohack.ui.presentation.screens.ProfileScreen
 import com.unitec.agrohack.ui.presentation.screens.StatisticsScreen
+import com.unitec.agrohack.ui.presentation.screens.ToolsScreen
 
 enum class Screen(val route: String, val title: String) {
-    Farms("farms", "Fincas"),
+    Tools("tools", "Herramientas"),
     Products("products", "Productos"),
     MyFarm("my_farm", "Tu Finca"),
     Statistics("statistics", "Analisis"),
@@ -36,19 +37,19 @@ enum class Screen(val route: String, val title: String) {
 @Composable
 fun AgroManagerApp(onLogout: () -> Unit = {}) {
     val navController = rememberNavController()
-    var currentScreen by remember { mutableStateOf(Screen.Farms) }
+    var currentScreen by remember { mutableStateOf(Screen.MyFarm) }
 
     Scaffold(
         topBar = {
             AgroTopAppBar(
                 title = when (currentScreen) {
                     Screen.Profile -> "Perfil"
-                    else -> "Agro Hack"
+                    else -> "Elotlan"
                 },
                 showBackButton = currentScreen == Screen.Profile,
                 onBackClick = {
                     navController.popBackStack()
-                    currentScreen = Screen.Farms
+                    currentScreen = Screen.MyFarm
                 },
                 onProfileClick = {
                     navController.navigate(Screen.Profile.route)
@@ -62,7 +63,7 @@ fun AgroManagerApp(onLogout: () -> Unit = {}) {
                     currentScreen = currentScreen,
                     onScreenSelected = { screen ->
                         navController.navigate(screen.route) {
-                            popUpTo(Screen.Farms.route) {
+                            popUpTo(Screen.MyFarm.route) {
                                 saveState = true
                             }
                             launchSingleTop = true
@@ -76,12 +77,12 @@ fun AgroManagerApp(onLogout: () -> Unit = {}) {
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Farms.route,
+            startDestination = Screen.MyFarm.route,
             modifier = Modifier.padding(paddingValues)
         ) {
-            composable(Screen.Farms.route) {
-                currentScreen = Screen.Farms
-                FarmsScreen()
+            composable(Screen.Tools.route) {
+                currentScreen = Screen.Tools
+                ToolsScreen()
             }
             composable(Screen.Products.route) {
                 currentScreen = Screen.Products
