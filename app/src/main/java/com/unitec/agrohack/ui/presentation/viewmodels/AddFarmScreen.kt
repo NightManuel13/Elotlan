@@ -93,11 +93,9 @@ fun AddFarmScreen(
             val newFarm = Farm(
                 id = System.currentTimeMillis().toString(),
                 name = farmName.trim(),
-                location = farmLocation.trim(),
                 description = farmDescription.trim(),
-                plots = plots,
-                createdAt = System.currentTimeMillis(),
-                updatedAt = System.currentTimeMillis()
+                location = farmLocation.trim(),
+                plots = plots
             )
             onSave(newFarm)
             Toast.makeText(context, "Finca creada correctamente", Toast.LENGTH_SHORT).show()

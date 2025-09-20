@@ -96,9 +96,10 @@ fun EditFarmScreen(
                 name = farmName.trim(),
                 description = farmDescription.trim(),
                 location = farmLocation.trim(),
-                plots = plots,
-            )
-            onSave(updatedFarmData)
+                plots = plots
+            ).apply {
+                onSave(this)
+            }
             Toast.makeText(context, "Finca actualizada correctamente", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "Por favor completa el nombre y ubicación de la finca", Toast.LENGTH_SHORT).show()
