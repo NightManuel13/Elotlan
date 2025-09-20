@@ -3,8 +3,10 @@ package com.unitec.agrohack.ui.presentation.viewmodels
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -19,6 +21,7 @@ import com.unitec.agrohack.data.Plot
 import com.unitec.agrohack.ui.presentation.components.AddCropDialog
 import com.unitec.agrohack.ui.theme.AgroHackTheme
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddFarmScreen(
@@ -26,7 +29,7 @@ fun AddFarmScreen(
     onSave: (Farm) -> Unit
 ) {
     val context = LocalContext.current
-    
+
     var farmName by remember { mutableStateOf("") }
     var farmLocation by remember { mutableStateOf("") }
     var farmDescription by remember { mutableStateOf("") }
@@ -93,10 +96,7 @@ fun AddFarmScreen(
                 name = farmName.trim(),
                 description = farmDescription.trim(),
                 location = farmLocation.trim(),
-                imageUrl = TODO(),
-                certificate = TODO(),
-                production = TODO(),
-                plots = TODO()
+                plots = plots
             )
             onSave(newFarm)
             Toast.makeText(context, "Finca creada correctamente", Toast.LENGTH_SHORT).show()
@@ -123,7 +123,7 @@ fun AddFarmScreen(
             ) {
                 IconButton(onClick = onBack) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Volver"
                     )
                 }
@@ -165,7 +165,7 @@ fun AddFarmScreen(
                             text = "Información Básica",
                             style = MaterialTheme.typography.titleMedium
                         )
-                        
+
                         OutlinedTextField(
                             value = farmName,
                             onValueChange = { farmName = it },
@@ -173,7 +173,7 @@ fun AddFarmScreen(
                             placeholder = { Text("Ej: Finca La Esperanza") },
                             modifier = Modifier.fillMaxWidth()
                         )
-                        
+
                         OutlinedTextField(
                             value = farmLocation,
                             onValueChange = { farmLocation = it },
@@ -181,7 +181,7 @@ fun AddFarmScreen(
                             placeholder = { Text("Ej: Manizales, Caldas") },
                             modifier = Modifier.fillMaxWidth()
                         )
-                        
+
                         OutlinedTextField(
                             value = farmDescription,
                             onValueChange = { farmDescription = it },
@@ -210,13 +210,13 @@ fun AddFarmScreen(
                             text = "Parcelas (Opcional)",
                             style = MaterialTheme.typography.titleMedium
                         )
-                        
+
                         Text(
                             text = "Puedes agregar parcelas ahora o más tarde desde la sección 'Tu Finca'",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        
+
                         // Agregar nueva parcela
                         Card(
                             modifier = Modifier.fillMaxWidth(),
@@ -234,7 +234,7 @@ fun AddFarmScreen(
                                     text = "Agregar nueva parcela",
                                     style = MaterialTheme.typography.titleSmall
                                 )
-                                
+
                                 OutlinedTextField(
                                     value = newPlotName,
                                     onValueChange = { newPlotName = it },
@@ -242,7 +242,7 @@ fun AddFarmScreen(
                                     placeholder = { Text("Ej: Parcela Norte") },
                                     modifier = Modifier.fillMaxWidth()
                                 )
-                                
+
                                 OutlinedTextField(
                                     value = newPlotLocation,
                                     onValueChange = { newPlotLocation = it },
@@ -250,7 +250,7 @@ fun AddFarmScreen(
                                     placeholder = { Text("Ej: Sector montañoso, lote 3") },
                                     modifier = Modifier.fillMaxWidth()
                                 )
-                                
+
                                 OutlinedButton(
                                     onClick = addPlot,
                                     modifier = Modifier.fillMaxWidth()
@@ -361,7 +361,7 @@ fun AddFarmPlotCard(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-                
+
                 IconButton(onClick = onRemove) {
                     Icon(
                         imageVector = Icons.Default.Delete,
@@ -393,7 +393,7 @@ fun AddFarmPlotCard(
                     Text("Agregar", style = MaterialTheme.typography.labelSmall)
                 }
             }
-            
+
             if (plot.crops.isNotEmpty()) {
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -429,7 +429,7 @@ fun AddFarmScreenPreview() {
     AgroHackTheme {
         AddFarmScreen(
             onBack = {},
-            onSave = {}
+            onSave = { _ -> }
         )
     }
 }
