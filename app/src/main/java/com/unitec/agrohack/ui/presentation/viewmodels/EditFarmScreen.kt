@@ -96,7 +96,7 @@ fun EditFarmScreen(
                 name = farmName.trim(),
                 description = farmDescription.trim(),
                 location = farmLocation.trim(),
-                plots = plots
+                plots = plots,
             )
             onSave(updatedFarmData)
             Toast.makeText(context, "Finca actualizada correctamente", Toast.LENGTH_SHORT).show()

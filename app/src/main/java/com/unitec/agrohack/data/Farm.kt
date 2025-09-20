@@ -8,5 +8,7 @@ data class Farm(
     val name: String,
     val description: String,
     val location: String,
-    val plots: List<Plot> = emptyList()
+    val plots: List<Plot> = emptyList(),
+    val createdAt: Long,
+    val updatedAt: Long
 )

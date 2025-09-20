@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -94,9 +93,11 @@ fun AddFarmScreen(
             val newFarm = Farm(
                 id = System.currentTimeMillis().toString(),
                 name = farmName.trim(),
-                description = farmDescription.trim(),
                 location = farmLocation.trim(),
-                plots = plots
+                description = farmDescription.trim(),
+                plots = plots,
+                createdAt = System.currentTimeMillis(),
+                updatedAt = System.currentTimeMillis()
             )
             onSave(newFarm)
             Toast.makeText(context, "Finca creada correctamente", Toast.LENGTH_SHORT).show()
@@ -123,7 +124,7 @@ fun AddFarmScreen(
             ) {
                 IconButton(onClick = onBack) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Volver"
                     )
                 }
@@ -429,7 +430,7 @@ fun AddFarmScreenPreview() {
     AgroHackTheme {
         AddFarmScreen(
             onBack = {},
-            onSave = { _ -> }
+            onSave = {}
         )
     }
 }

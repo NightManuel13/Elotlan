@@ -16,12 +16,12 @@ import androidx.navigation.compose.rememberNavController
 import com.unitec.agrohack.ui.presentation.components.AgroBottomAppBar
 import com.unitec.agrohack.ui.presentation.components.AgroTopAppBar
 import com.unitec.agrohack.ui.presentation.screens.AIGenerationScreen
-import com.unitec.agrohack.ui.presentation.screens.FarmsScreen
 import com.unitec.agrohack.ui.presentation.screens.MyFarmScreen
 import com.unitec.agrohack.ui.presentation.screens.ProductsScreen
 import com.unitec.agrohack.ui.presentation.screens.ProfileScreen
 import com.unitec.agrohack.ui.presentation.screens.StatisticsScreen
 import com.unitec.agrohack.ui.presentation.screens.ToolsScreen
+import com.unitec.agrohack.ui.presentation.viewmodels.AddFarmScreen
 
 enum class Screen(val route: String, val title: String) {
     Tools("tools", "Herramientas"),
@@ -90,7 +90,7 @@ fun AgroManagerApp(onLogout: () -> Unit = {}) {
             }
             composable(Screen.MyFarm.route) {
                 currentScreen = Screen.MyFarm
-                MyFarmScreen()
+                MyFarmScreen(onAddFarm = { navController.navigate("addFarm") })
             }
             composable(Screen.Statistics.route) {
                 currentScreen = Screen.Statistics
@@ -103,6 +103,16 @@ fun AgroManagerApp(onLogout: () -> Unit = {}) {
             composable(Screen.Profile.route) {
                 currentScreen = Screen.Profile
                 ProfileScreen(onLogout = onLogout)
+            }
+            composable("addFarm") {
+                AddFarmScreen(
+                    onBack = { navController.popBackStack() },
+                    onSave = { farm ->
+                        // Guarda la finca y regresa
+                        // Actualiza el estado de la finca en ViewModel
+                        navController.popBackStack()
+                    }
+                )
             }
         }
     }
