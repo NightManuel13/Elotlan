@@ -1,4 +1,4 @@
-# Elotlan- Agropecuarios a la mano
+# ![plot](./app/src/main/res/mipmap-hdpi/ic_launcher_round.png) Elotlan- Agropecuarios a la mano
 
 Una aplicación móvil para la gestión de fincas agrícolas desarrollada con Jetpack Compose.
 
