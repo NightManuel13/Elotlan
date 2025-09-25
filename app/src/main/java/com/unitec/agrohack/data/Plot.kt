@@ -1,15 +1,5 @@
 package com.unitec.agrohack.data
 
-data class Plot(
-    val id: String = "",
-    val name: String = "",
-    val location: String = "",
-    val crops: List<String> = emptyList(),
-    val createdAt: Long = System.currentTimeMillis(),
-    val updatedAt: Long = System.currentTimeMillis()
-)
-
-// Extension functions for Plot operations
 fun Plot.addCrop(cropName: String): Plot {
     return if (crops.contains(cropName)) {
         this
@@ -55,14 +45,16 @@ fun Plot.getCropCount(): Int {
     return crops.size
 }
 
-// Sample data for testing
+/* test
+
 object PlotSamples {
     val samplePlots = listOf(
         Plot(
             id = "1",
             name = "Parcela Norte",
             location = "Sector montañoso, lote 1",
-            crops = listOf("Café", "Plátano")
+            crops = listOf("Café", "Plátano"),
+            updatedAt = TODO()
         ),
         Plot(
             id = "2",
@@ -77,4 +69,4 @@ object PlotSamples {
             crops = listOf("Tomate", "Lechuga", "Cilantro", "Cebolla")
         )
     )
-}
+}*/

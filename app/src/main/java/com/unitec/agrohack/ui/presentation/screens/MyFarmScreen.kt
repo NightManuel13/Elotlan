@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 data class UserFarm(
-    val id: Int,
+    val id: String,
     val name: String,
     val location: String,
     val description: String?,
@@ -22,7 +22,7 @@ data class UserFarm(
 )
 
 data class FarmPlot(
-    val id: Int,
+    val id: String,
     val name: String,
     val location: String,
     val crops: List<String>
@@ -30,17 +30,16 @@ data class FarmPlot(
 
 @Composable
 fun MyFarmScreen(
+    userFarm: UserFarm? = null,
+    onEditFarm: () -> Unit = {},
     onAddFarm: () -> Unit = {}
 ) {
-    // Mock data - ViewModel
-    var userFarm by remember { mutableStateOf<UserFarm?>(null) }
+    // Si necesitas estado local para modificaciones
 
     if (userFarm == null) {
-        // Estado cuando no hay finca configurada
         EmptyFarmState(onAddFarm = onAddFarm)
     } else {
-        // Estado cuando hay finca configurada
-        FarmDetailsScreen(farm = userFarm!!)
+        FarmDetailsScreen(farm = userFarm)
     }
 }
 

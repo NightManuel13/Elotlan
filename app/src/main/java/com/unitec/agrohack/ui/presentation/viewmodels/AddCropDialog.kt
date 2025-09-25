@@ -1,4 +1,4 @@
-package com.unitec.agrohack.ui.presentation.components
+package com.unitec.agrohack.ui.presentation.viewmodels
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*

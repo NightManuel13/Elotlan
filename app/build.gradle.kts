@@ -12,6 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.unitec.agrohack"
         minSdk = 23
+        //noinspection OldTargetApi
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -40,15 +41,19 @@ dependencies {
 
     // Navigation Compose
     implementation(libs.androidx.navigation.compose)
-    implementation("androidx.compose.material:material-icons-extended:1.6.7")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
 
     // Firebase Auth
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     implementation("com.google.firebase:firebase-appcheck-playintegrity")
-    implementation("com.google.firebase:firebase-firestore:26.0.0")
+    implementation("com.google.firebase:firebase-firestore:26.0.1")
     implementation(libs.firebase.database)
     implementation(libs.androidx.foundation)
+
+    // DataStore local
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
+    implementation(libs.androidx.compose.foundation)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -58,7 +63,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // ViewModel y LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.4")
+
     //Lottie Library for animations
-    implementation("com.airbnb.android:lottie-compose:6.1.0")
-    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("com.airbnb.android:lottie-compose:6.6.9")
+    implementation("io.coil-kt:coil-compose:2.7.0")
 }

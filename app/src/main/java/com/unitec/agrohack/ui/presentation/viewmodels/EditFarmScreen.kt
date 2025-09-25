@@ -18,7 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.unitec.agrohack.data.Farm
 import com.unitec.agrohack.data.Plot
-import com.unitec.agrohack.ui.presentation.components.AddCropDialog
 import com.unitec.agrohack.ui.theme.AgroHackTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,7 +44,6 @@ fun EditFarmScreen(
                 id = System.currentTimeMillis().toString(),
                 name = newPlotName.trim(),
                 location = newPlotLocation.trim(),
-                crops = emptyList()
             )
             plots = plots + newPlot
             newPlotName = ""
@@ -69,7 +67,7 @@ fun EditFarmScreen(
     val handleAddCrop = { cropName: String ->
         plots = plots.map { plot ->
             if (plot.id == selectedPlotId) {
-                plot.copy(crops = plot.crops + cropName)
+                plot.copy(crops = plot.crops + cropName,)
             } else {
                 plot
             }
@@ -81,7 +79,7 @@ fun EditFarmScreen(
     val removeCropFromPlot = { plotId: String, cropIndex: Int ->
         plots = plots.map { plot ->
             if (plot.id == plotId) {
-                plot.copy(crops = plot.crops.filterIndexed { index, _ -> index != cropIndex })
+                plot.copy(crops = plot.crops.filterIndexed { index, _ -> index != cropIndex },)
             } else {
                 plot
             }

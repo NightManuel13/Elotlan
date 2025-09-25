@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth
 fun ProfileScreen(onLogout: () -> Unit) {
     var notificationsEnabled by remember { mutableStateOf(true) }
     var userEmail by remember { mutableStateOf("Cargando correo...") }
+    var snackbarMessage by remember { mutableStateOf("") }
+    var showSnackbar by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -179,7 +181,10 @@ fun ProfileScreen(onLogout: () -> Unit) {
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             TextButton(
-                onClick = { /* pantalla de soporte tecnico */ },
+                onClick = {
+                        snackbarMessage = "Función de ayuda próximamente"
+                        showSnackbar = true
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
