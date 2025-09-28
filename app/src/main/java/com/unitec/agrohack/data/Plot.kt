@@ -44,29 +44,3 @@ fun Plot.hasCrops(): Boolean {
 fun Plot.getCropCount(): Int {
     return crops.size
 }
-
-/* test
-
-object PlotSamples {
-    val samplePlots = listOf(
-        Plot(
-            id = "1",
-            name = "Parcela Norte",
-            location = "Sector montañoso, lote 1",
-            crops = listOf("Café", "Plátano"),
-            updatedAt = TODO()
-        ),
-        Plot(
-            id = "2",
-            name = "Parcela Sur",
-            location = "Zona plana, cerca del río",
-            crops = listOf("Maíz", "Frijol", "Yuca")
-        ),
-        Plot(
-            id = "3",
-            name = "Huerta Familiar",
-            location = "Cerca de la casa principal",
-            crops = listOf("Tomate", "Lechuga", "Cilantro", "Cebolla")
-        )
-    )
-}*/
