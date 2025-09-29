@@ -18,14 +18,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.unitec.agrohack.data.Farm
 import com.unitec.agrohack.data.Plot
+import com.unitec.agrohack.ui.presentation.screens.FarmPlot
+import com.unitec.agrohack.ui.presentation.screens.UserFarm
 import com.unitec.agrohack.ui.theme.AgroHackTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditFarmScreen(
     onBack: () -> Unit,
-    onSave: (Farm) -> Unit,
-    farmData: Farm?
+    onSave: @Composable (Farm) -> Unit,
+    farmData: UserFarm?
 ) {
     val context = LocalContext.current
     
@@ -45,7 +47,7 @@ fun EditFarmScreen(
                 name = newPlotName.trim(),
                 location = newPlotLocation.trim(),
             )
-            plots = plots + newPlot
+            plots = (plots + newPlot) as List<FarmPlot>
             newPlotName = ""
             newPlotLocation = ""
             Toast.makeText(context, "Parcela agregada correctamente", Toast.LENGTH_SHORT).show()
@@ -67,7 +69,7 @@ fun EditFarmScreen(
     val handleAddCrop = { cropName: String ->
         plots = plots.map { plot ->
             if (plot.id == selectedPlotId) {
-                plot.copy(crops = plot.crops + cropName,)
+                plot.copy(crops = plot.crops + cropName)
             } else {
                 plot
             }
@@ -79,7 +81,7 @@ fun EditFarmScreen(
     val removeCropFromPlot = { plotId: String, cropIndex: Int ->
         plots = plots.map { plot ->
             if (plot.id == plotId) {
-                plot.copy(crops = plot.crops.filterIndexed { index, _ -> index != cropIndex },)
+                plot.copy(crops = plot.crops.filterIndexed { index, _ -> index != cropIndex })
             } else {
                 plot
             }
@@ -87,14 +89,16 @@ fun EditFarmScreen(
         Toast.makeText(context, "Cultivo eliminado", Toast.LENGTH_SHORT).show()
     }
 
-    val handleSave = {
+    val handleSave = @androidx.compose.runtime.Composable {
         if (farmName.isNotBlank() && farmLocation.isNotBlank()) {
             val updatedFarmData = Farm(
                 id = farmData?.id ?: System.currentTimeMillis().toString(),
                 name = farmName.trim(),
                 description = farmDescription.trim(),
                 location = farmLocation.trim(),
-                plots = plots
+                plots = plots.map { plot ->
+                    Plot(id = plot.id, name = plot.name, location = plot.location, crops = plot.crops)
+                }
             ).apply {
                 onSave(this)
             }
@@ -132,7 +136,7 @@ fun EditFarmScreen(
                     modifier = Modifier.weight(1f)
                 )
                 Button(
-                    onClick = handleSave,
+                    onClick = handleSave as () -> Unit,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary
                     )
@@ -317,7 +321,7 @@ fun EditFarmScreen(
 
 @Composable
 fun PlotCard(
-    plot: Plot,
+    plot: FarmPlot,
     onRemove: () -> Unit,
     onAddCrop: () -> Unit,
     onRemoveCrop: (Int) -> Unit

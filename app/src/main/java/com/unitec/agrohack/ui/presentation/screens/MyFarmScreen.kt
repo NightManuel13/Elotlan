@@ -39,7 +39,7 @@ fun MyFarmScreen(
     if (userFarm == null) {
         EmptyFarmState(onAddFarm = onAddFarm)
     } else {
-        FarmDetailsScreen(farm = userFarm)
+        FarmDetailsScreen(farm = userFarm, onEditFarm = onEditFarm)
     }
 }
 
@@ -90,7 +90,7 @@ fun EmptyFarmState(onAddFarm: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FarmDetailsScreen(farm: UserFarm) {
+fun FarmDetailsScreen(farm: UserFarm, onEditFarm: () -> Unit) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -106,10 +106,21 @@ fun FarmDetailsScreen(farm: UserFarm) {
                 Column(
                     modifier = Modifier.padding(16.dp)
                 ) {
-                    Text(
-                        text = farm.name,
-                        style = MaterialTheme.typography.headlineMedium
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = farm.name,
+                            style = MaterialTheme.typography.headlineMedium
+                        )
+                        IconButton(onClick = onEditFarm) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = "Editar Finca"
+                            )
+                        }
+                    }
                     Text(
                         text = farm.location,
                         style = MaterialTheme.typography.bodyMedium,

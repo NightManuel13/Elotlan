@@ -10,6 +10,7 @@ import kotlinx.coroutines.delay
 import com.unitec.agrohack.data.UserProfile
 import com.unitec.agrohack.data.ProfileUiState
 import com.google.firebase.auth.FirebaseAuth
+import kotlin.also
 
 class ProfileViewModel : ViewModel() {
     
@@ -18,9 +19,9 @@ class ProfileViewModel : ViewModel() {
     
     private val _profile = MutableStateFlow(
         UserProfile(
-            name = "",
-            email = "",
-            avatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=150&h=150"
+            avatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=150&h=150",
+            phone = "",
+            location = "",
         )
     )
     val profile: StateFlow<UserProfile> = _profile.asStateFlow()
@@ -45,8 +46,8 @@ class ProfileViewModel : ViewModel() {
                 val current = _profile.value
                 val updated = if (user != null) {
                     current.copy(
-                        name = if (!user.displayName.isNullOrBlank()) user.displayName!! else current.name,
-                        email = user.email ?: current.email
+                        if (!user.displayName.isNullOrBlank()) user.displayName!! else current.name,
+                        user.email ?: current.email
                     )
                 } else {
                     current
@@ -117,7 +118,6 @@ class ProfileViewModel : ViewModel() {
             try {
                 _isLoading.value = true
                 FirebaseAuth.getInstance().signOut()
-                _profile.value = UserProfile()
                 _isEditing.value = false
                 _uiState.value = ProfileUiState.Success(_profile.value)
             } catch (e: Exception) {

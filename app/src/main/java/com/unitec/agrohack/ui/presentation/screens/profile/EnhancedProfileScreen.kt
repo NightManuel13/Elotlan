@@ -31,11 +31,10 @@ fun EnhancedProfileScreen(
     val profile by viewModel.profile.collectAsState()
     val isEditing by viewModel.isEditing.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
-    
+
     var editingProfile by remember(profile) { mutableStateOf(profile) }
     val snackbarHostState = remember { SnackbarHostState() }
-    
-    // Handle UI state changes
+
     LaunchedEffect(uiState) {
         when (uiState) {
             is ProfileUiState.Success -> {
@@ -47,7 +46,7 @@ fun EnhancedProfileScreen(
             else -> {}
         }
     }
-    
+
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
@@ -87,7 +86,7 @@ fun EnhancedProfileScreen(
                     CircularProgressIndicator()
                 }
             }
-            
+
             is ProfileUiState.Error -> {
                 Column(
                     modifier = Modifier
@@ -117,7 +116,7 @@ fun EnhancedProfileScreen(
                     }
                 }
             }
-            
+
             is ProfileUiState.Success -> {
                 ProfileContent(
                     modifier = Modifier
@@ -157,7 +156,7 @@ private fun ProfileTopBarActions(
             ) {
                 Icon(Icons.Default.Close, contentDescription = "Cancelar")
             }
-            
+
             IconButton(
                 onClick = onSaveProfile,
                 enabled = !isLoading
@@ -189,27 +188,11 @@ private fun ProfileContent(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Personal Information Card
         PersonalInfoCard(
             profile = profile,
             isEditing = isEditing,
             onProfileChange = onProfileChange,
             onAvatarChange = onAvatarChange
-        )
-        
-        // Help & Support Card
-        ActionCard(
-            title = "Ayuda y Soporte",
-            icon = Icons.Default.Help,
-            onClick = onHelpClick
-        )
-        
-        // Logout Card
-        ActionCard(
-            title = "Cerrar Sesión",
-            icon = Icons.Default.ExitToApp,
-            isDestructive = true,
-            onClick = onLogoutClick
         )
     }
 }
@@ -246,8 +229,7 @@ private fun PersonalInfoCard(
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
-            
-            // Avatar and Name Section
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -258,7 +240,7 @@ private fun PersonalInfoCard(
                     onAvatarSelected = onAvatarChange,
                     isEditing = isEditing
                 )
-                
+
                 Column(modifier = Modifier.weight(1f)) {
                     if (isEditing) {
                         OutlinedTextField(
@@ -301,22 +283,21 @@ private fun PersonalInfoCard(
                     }
                 }
             }
-            
-            // Email Information
+
             ContactInfoItem(
                 icon = Icons.Default.Email,
                 label = "Email",
                 value = profile.email,
                 isEditing = isEditing,
                 keyboardType = KeyboardType.Email,
-                onValueChange = { onProfileChange(profile.copy(email = it)) }
+                onValueChange = { onProfileChange(profile.copy(email = it,)) }
             )
         }
     }
 }
 
 @Composable
-private fun ContactInfoItem(
+fun ContactInfoItem(
     icon: ImageVector,
     label: String,
     value: String,
@@ -336,7 +317,7 @@ private fun ContactInfoItem(
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.size(20.dp)
         )
-        
+
         if (isEditing) {
             OutlinedTextField(
                 value = value,
@@ -371,8 +352,8 @@ private fun ActionCard(
     title: String,
     icon: ImageVector,
     isDestructive: Boolean = false,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -384,9 +365,9 @@ private fun ActionCard(
                 .fillMaxWidth()
                 .padding(8.dp),
             colors = ButtonDefaults.textButtonColors(
-                contentColor = if (isDestructive) 
-                    MaterialTheme.colorScheme.error 
-                else 
+                contentColor = if (isDestructive)
+                    MaterialTheme.colorScheme.error
+                else
                     MaterialTheme.colorScheme.onSurface
             )
         ) {
@@ -409,7 +390,6 @@ private fun ActionCard(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun EnhancedProfileScreenPreview() {
     MaterialTheme {

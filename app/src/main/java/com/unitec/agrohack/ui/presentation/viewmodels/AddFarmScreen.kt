@@ -97,8 +97,9 @@ fun AddFarmScreen(
                 plots = plots,
                 createdAt = System.currentTimeMillis(),
                 updatedAt = System.currentTimeMillis()
-            )
-            onSave(newFarm)
+            ).apply {
+                onSave(this)
+            }
             Toast.makeText(context, "Finca creada correctamente", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "Por favor completa el nombre y ubicación de la finca", Toast.LENGTH_SHORT).show()

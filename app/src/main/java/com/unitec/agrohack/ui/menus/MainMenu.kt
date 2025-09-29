@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -24,6 +25,7 @@ import com.unitec.agrohack.ui.presentation.screens.StatisticsScreen
 import com.unitec.agrohack.ui.presentation.screens.ToolsScreen
 import com.unitec.agrohack.ui.presentation.screens.UserFarm
 import com.unitec.agrohack.ui.presentation.viewmodels.AddFarmScreen
+import com.unitec.agrohack.ui.presentation.viewmodels.EditFarmScreen
 
 enum class Screen(val route: String, val title: String) {
     Tools("tools", "Herramientas"),
@@ -32,8 +34,8 @@ enum class Screen(val route: String, val title: String) {
     Statistics("statistics", "Analisis"),
     AIGeneration("ai_generation", "IA"),
     Profile("profile", "Perfil"),
-
-    AddFarm("addFarm", "Agregar Finca")
+    AddFarm("addFarm", "Agregar Finca"),
+    EditFarm("editFarm", "Editar Finca")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,7 +51,7 @@ fun AgroManagerApp(onLogout: () -> Unit = {}) {
             AgroTopAppBar(
                 title = when (currentScreen) {
                     Screen.Profile -> "Perfil"
-                    Screen.AddFarm -> "Agregar Finca"
+                    Screen.AddFarm -> ""
                     else -> "Elotlan"
                 },
                 showBackButton = currentScreen == Screen.Profile,
@@ -98,7 +100,8 @@ fun AgroManagerApp(onLogout: () -> Unit = {}) {
                 currentScreen = Screen.MyFarm
                 MyFarmScreen(
                     userFarm = userFarm,
-                    onAddFarm = { navController.navigate("addFarm") })
+                    onAddFarm = { navController.navigate("addFarm") },
+                    onEditFarm = {navController.navigate("editFarm") })
             }
             composable(Screen.Statistics.route) {
                 currentScreen = Screen.Statistics
@@ -135,6 +138,21 @@ fun AgroManagerApp(onLogout: () -> Unit = {}) {
                             }
                         )
                         navController.popBackStack()
+                    }
+                )
+            }
+            composable(Screen.EditFarm.route) {
+                EditFarmScreen(
+                    farmData = userFarm,
+                    onBack = {
+                        navController.navigate(Screen.MyFarm.route) {
+                            popUpTo(Screen.MyFarm.route) { inclusive = false }
+                        }
+                    },
+                    onSave = { farm ->
+                        navController.navigate(Screen.MyFarm.route) {
+                            popUpTo(Screen.MyFarm.route) { inclusive = false }
+                        }
                     }
                 )
             }

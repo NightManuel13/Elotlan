@@ -4,7 +4,9 @@ data class UserProfile(
     val name: String = "",
     val email: String = "",
     val avatarUrl: String = "",
-    val isVerified: Boolean = true
+    val isVerified: Boolean = true,
+    val phone: String,
+    val location: String
 )
 
 sealed class ProfileUiState {

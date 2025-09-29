@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     implementation("com.google.firebase:firebase-appcheck-playintegrity")
     implementation("com.google.firebase:firebase-firestore:26.0.1")
+    implementation("com.google.firebase:firebase-auth-ktx:23.2.1")
     implementation(libs.firebase.database)
     implementation(libs.androidx.foundation)
 
